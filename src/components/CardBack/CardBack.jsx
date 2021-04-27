@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./CardBack.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CrudContext } from "../../context/crudContext";
 import List from "../List";
 
 const CardBack = (props) => {
-  const { recipe, toggleFav } = props;
-  const { ingredients, strMeal, strInstructions, isFav } = recipe;
+  const { recipe } = props;
+  const { ingredients, name, instructions, isFav } = recipe;
   const [favState, setFavState] = useState(isFav);
+  const crudContext = useContext(CrudContext);
+  const { toggleFav } = crudContext;
 
   const shortenInstructions = (instructions) =>
     instructions.length < 300
@@ -26,9 +29,9 @@ const CardBack = (props) => {
       <span className={styles.heart} onClick={handleFavClick}>
         <FontAwesomeIcon icon={heartIcon} />
       </span>
-      <h2>{strMeal}</h2>
+      <h2>{name}</h2>
       <h3>Instructions</h3>
-      <p>{shortenInstructions(strInstructions)}</p>
+      <p>{shortenInstructions(instructions)}</p>
       <h3>Ingredients</h3>
       <div className={styles.list}>
         <List items={ingredients} />

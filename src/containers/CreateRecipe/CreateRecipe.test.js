@@ -1,7 +1,7 @@
 import React from "react";
-import { Routes } from "./Routes";
+import CreateRecipe from "./CreateRecipe";
 
-describe("Routes tests", () => {
+describe("CreateRecipe tests", () => {
   let component;
 
   beforeEach(() => {

@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styles from "./Cookbook.module.scss";
-import recipes from "../../data/recipes";
 import FeedbackPanel from "../../components/FeedbackPanel/FeedbackPanel";
 import CardList from "../../components/CardList/CardList";
+import { CrudContext } from "../../context/crudContext";
 
 const Cookbook = () => {
-  const [favourites, setFavourites] = useState(recipes.filter(recipe => recipe.isFav))
-
-  const removeFromFav = (recipe) => {
-    recipe.isFav = false;
-    setFavourites(recipes.filter((recipe) => recipe.isFav));
-  };
+  const crudContext = useContext(CrudContext);
+  const { favourites } = crudContext;
 
   const contentJsx = favourites.length ? (
-    <CardList recipes={favourites} toggleFav={removeFromFav} />
+    <CardList recipes={favourites} />
   ) : (
     <FeedbackPanel
       header="No favourites"
